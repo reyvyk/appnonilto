@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-      <table-api></table-api> 
+  <div>
+    <table-api></table-api>
   </div>
 </template>
 
