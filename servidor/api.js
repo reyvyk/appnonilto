@@ -33,4 +33,4 @@ MongoClient.connect(url, (err, db) => {
   app.listen(port, () => {
     console.log('Ta funcionando KRALHO!!!')
   })
-}
+})
