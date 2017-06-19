@@ -2,10 +2,10 @@ const Express = require('express')
 const MongoClient = require('mongodb').MongoClient;
 
 const app = Express()
-
 const port = process.env.PORT || 3000
 
 let myDB;
+const url = 'mongodb://127.0.0.1:27017/crawler';
 
 app.get('/', (req, res) => {
   res.send('Ta funcionando KRALHO!!!')
