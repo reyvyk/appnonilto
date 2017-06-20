@@ -20,7 +20,7 @@ MongoClient.connect(url, (err, db) => {
 			request(noticia.Social.Url,(err, res, body) => {
 				if (err) return console.log('Erro' + err);
 
-				const $ = chegerio.load(body);
+				const $ = cheerio.load(body);
 				noticia.conteudo = $('.article-text').text();
 
 				utils.inserir(db, 'pages', noticia, afterInsert);
