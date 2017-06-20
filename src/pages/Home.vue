@@ -33,21 +33,24 @@ export default {
   methods: {
     buscarNoticia () {
       if (this.busca.length === 0) {
-        return this.mostragem = Object.assign({}, this.noticias);
+        this.mostragem = Object.assign({}, this.noticias);
+        return
       }
       const palavras = this.busca.split(' ');
-      return this.mostragem = this.noticias.filter(noticia => {
+      this.mostragem = this.noticias.filter(noticia => {
         for (let palavra in palavras) {
-          if (noticia.Conteudo.search(palavra) >= 0) return true
+          if (noticia.conteudo.search(palavra) >= 0) return true;
         }
         return false;
       });
+      console.log(`Noticias encontradas: ${this.mostragem.length}`);
     }
   },
   mounted () {
     axios.get('http://127.0.0.1:3000/noticias')
       .then(response => {
-        this.mostragem = this.noticias = response.data;
+        this.noticias = response.data;
+        this.mostragem = Object.assign({}, this.noticias);
       })
       .catch(err => {
         console.log(err);
