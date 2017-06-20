@@ -1,7 +1,7 @@
 <template>
   <div>
     <figure>
-      <img src="{{ image }}">
+      <img :src="{{ image }}">
     </figure>
     <title>{{ title }}</title>
     <p>{{ chamada }}</p>
