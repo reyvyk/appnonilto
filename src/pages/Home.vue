@@ -40,6 +40,7 @@ export default {
       this.mostragem = this.noticias.filter(noticia => {
         for (let i in palavras) {
           if (noticia.conteudo.search(palavras[i]) >= 0) return true;
+          if (noticia.Title.search(palavras[i]) >= 0) return true;
         }
         return false;
       });
