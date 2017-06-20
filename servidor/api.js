@@ -7,6 +7,14 @@ const port = process.env.PORT || 3000
 let myDB;
 const url = 'mongodb://127.0.0.1:27017/crawler';
 
+/* Cors */
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Content-Location');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  next();
+});
+
 app.get('/', (req, res) => {
   res.send('Ta funcionando KRALHO!!!')
 })
