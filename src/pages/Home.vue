@@ -22,7 +22,7 @@ export default {
   mounted () {
     axios.get('http://127.0.0.1:3000/noticias')
       .then(response => {
-        this.noticia = response.data;
+        this.noticias = response.data;
       })
       .catch(err => {
         console.log(err);
