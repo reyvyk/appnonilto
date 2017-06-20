@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import request from 'request'
+import axios from 'axios'
 import cardNoticia from './../components/card-noticia.vue'
 
 export default {
@@ -20,13 +20,14 @@ export default {
     }
   },
   mounted () {
-    request('http://127.0.0.1:3000/noticias', (error, response, body) => {
-      if (error) return console.log(error), alert('erro')
-
-      this.noticias = typeof body !== 'object'
-        ? JSON.parse(body)
-        : body
-    });
+    axios.get('http://127.0.0.1:3000/noticias')
+      .then(response => {
+        this.noticia = response.data;
+      })
+      .catch(err => {
+        console.log(err);
+        alert('deu ruim!');
+      })
   },
   components: {
     cardNoticia
