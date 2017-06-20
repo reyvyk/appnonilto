@@ -1,8 +1,10 @@
 <template>
   <div>
-    <span>Buscar</span>
-    <input type="search" :value="busca" v-model.trim="busca">
-    <button type="button" @click="buscarNoticia">Buscar</button>
+    <form @submit.prevent="buscarNoticia">
+      <span>Buscar</span>
+      <input type="search" :value="busca" v-model.trim="busca">
+      <button type="submit">Buscar</button>
+    </form>
     <template v-if="noticias">
       <h1>Noticias</h1>
       <card-noticia v-for="noticia in mostragem"
@@ -35,7 +37,7 @@ export default {
       }
       const palavras = this.busca.split(' ');
       return this.mostragem = this.noticias.filter(noticia => {
-        for (palavra in palavras) {
+        for (let palavra in palavras) {
           if (noticia.Conteudo.search(palavra) >= 0) return true
         }
         return false;
