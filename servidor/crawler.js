@@ -3,44 +3,30 @@ const request = require('request');
 const cheerio = require('cheerio');
 const utils = require('./utils');
 
-
 const apitec = "https://api.tecmundo.com.br/api/v2/news/latest-news/noticias?top=500";
 const url = 'mongodb://127.0.0.1:27017/crawler';
 
 MongoClient.connect(url, (err, db) => {
-	if(err) return console.log('ERRO : ' + err);
+	if (err) return console.log('ERRO : ' + err);
 
 	request(apitec, (err, res, body) => {
-		if(err) return console.log(err);
+		if (err) return console.log(err);
 
-		let resapitec = JSON.parse(body);
+		let resApitec = JSON.parse(body);
 
+		for (let i in resApitec.data) {
+			const noticia = Object.assign({}, resApitec.data[i]);
 
-		for(let i in resapitec.data) {
-			let link = resapitec.data[i].Social.Url;
+			request(noticia.Social.Url,(err, res, body) => {
+				if (err) return console.log('Erro' + err);
 
-			request(link,(err, res, body) => {
-				if(err) return console.log('Erro' + err);
+				const $ = chegerio.load(body);
+				noticia.conteudo = $('.article-text').text();
 
-				let $ = cheerio.load(body);
-				let conteudo = $('body').text();
-				let titulo = $('.article-title').text();
-				let text = $('.article-text').text();
-
-				let pagina = {
-					link : link,
-					titulo : titulo,
-					conteudo : conteudo,
-				}
-
-				utils.inserir(db, 'pages', pagina, afterInsert);
-
+				utils.inserir(db, 'pages', noticia, afterInsert);
 			});
-
 		};
-
 	});
-
 });
 
 function afterInsert(err, result) {
