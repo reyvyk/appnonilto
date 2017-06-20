@@ -34,7 +34,7 @@ export default {
     buscarNoticia () {
       if (this.busca.length === 0) {
         this.mostragem = Object.assign({}, this.noticias);
-        return
+        return;
       }
       const palavras = this.busca.split(' ');
       this.mostragem = this.noticias.filter(noticia => {
@@ -43,7 +43,7 @@ export default {
         }
         return false;
       });
-      console.log(`Noticias encontradas: ${this.mostragem.length}`);g
+      console.log(`Noticias encontradas: ${this.mostragem.length}`);
     }
   },
   mounted () {
