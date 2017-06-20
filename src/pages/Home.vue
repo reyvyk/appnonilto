@@ -38,12 +38,12 @@ export default {
       }
       const palavras = this.busca.split(' ');
       this.mostragem = this.noticias.filter(noticia => {
-        for (let palavra in palavras) {
-          if (noticia.conteudo.search(palavra) >= 0) return true;
+        for (let i in palavras) {
+          if (noticia.conteudo.search(palavras[i]) >= 0) return true;
         }
         return false;
       });
-      console.log(`Noticias encontradas: ${this.mostragem.length}`);
+      console.log(`Noticias encontradas: ${this.mostragem.length}`);g
     }
   },
   mounted () {
