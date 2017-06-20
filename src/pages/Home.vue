@@ -1,12 +1,12 @@
 <template>
   <div>
-    <form @submit.prevent="buscarNoticia">
+    <form @submit.prevent="buscarNoticia" class="top">
+      <h1>Notícias</h1>
       <span>Buscar</span>
       <input type="search" :value="busca" v-model.trim="busca">
       <button type="submit">Buscar</button>
     </form>
     <template v-if="noticias">
-      <h1>Noticias</h1>
       <card-noticia v-for="noticia in mostragem"
         :image="noticia.Image"
         :title="noticia.Title"
@@ -65,5 +65,9 @@ export default {
 </script>
 
 <style>
+  .top{
+    margin-left: 100px;
+  }
+
 
 </style>
